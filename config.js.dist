@@ -13,9 +13,6 @@ module.exports = {
 		"udp6:[::1]:30826"
 	],
 	
-	/* show output on console, (-v on command line) */
-	info: true,
-	
 	// show debug messages, (-v on command line)
 	debug: true
 	

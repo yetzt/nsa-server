@@ -7,6 +7,7 @@ var path = require("path");
 var querystring = require("querystring");
 
 // npm modules
+var debug = require("debug");
 var express = require("express");
 var commander = require("commander");
 
@@ -32,9 +33,12 @@ var config = gchq()
 	.file(commander.config)
 	.set("web", commander.web)
 	.set("listen", commander.listen)
-	.set("info", (commander.verbose >= 1))
-	.set("debug", (commander.verbose >= 2));
-	
+	.set("debug", (commander.verbose >= 0));
+
+// set debugger
+if (config.get("debug")) debug.enable("nsa");
+var dbg = debug("nsa");
+
 // check if listeners are configured
 if (!config.get("listen")) {
 	console.error("no listeners defined");
@@ -130,7 +134,7 @@ config.get("listen").forEach(function(l){
 			}
 			
 			server.listen(listen.pathname, function(){
-				if (config.get("info")) console.log("listening on socket", listen.pathname);
+				dbg("listening on socket %s", listen.pathname);
 
 				// check options
 				if (listen.query) {
@@ -142,7 +146,7 @@ config.get("listen").forEach(function(l){
 						if (!isNaN(mode) && mode <= 0777) {
 							fs.chmod(listen.pathname, mode, function(err){
 								if (err) return console.error("could not chmod", mode.toString(8), "socket", listen.pathname);
-								if (config.get("info")) console.log("change mode", mode.toString(8), listen.pathname);
+								dbg("change mode %s %s", mode.toString(8), listen.pathname);
 							});
 						}
 					}
@@ -159,11 +163,11 @@ config.get("listen").forEach(function(l){
 			if (listen.hasOwnProperty("hostname") && typeof listen.hostname === "string" && listen.hostname !== "") {
 				// listen on hostname and port
 				server.listen((listen.port || 46001), listen.hostname, function(err){
-					if (config.get("info")) console.log("listening on http://"+listen.hostname+":"+(listen.port || 46001));
+					dbg("listening on %s", "http://"+listen.hostname+":"+(listen.port || 46001));
 				});
 			} else {
 				server.listen((listen.port || 46001), function(err){
-					if (config.get("info")) console.log("listening on http://*:"+(listen.port || 46001));
+					dbg("listening on %s", "http://*:"+(listen.port || 46001));
 				});
 			}
 		break;
