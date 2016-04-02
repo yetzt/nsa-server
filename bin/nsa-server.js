@@ -58,7 +58,7 @@ config.get("listen").forEach(function(l){
 // listen according to config and stuff
 (function(){
 
-	if (!config.has("web") || config.type("web") !== "string") return;
+	if (!config.has("web") || config.type("web") !== "string") return console.error("no web interface configured") || process.exit(8);
 
 	var _opts = querystring.parse(url.parse(config.get("web")).query);
 
