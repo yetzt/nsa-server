@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var NSA = require(path.resolve(__dirname, '../nsa.js'));
+var NSA = require('nsa');
 
 var hearts = [];
 

@@ -17,6 +17,9 @@
     "express": ">= 4.2.0",
     "debug": "^2.2.0",
   },
+  "devDependencies": {
+    "nsa": "^0.1.0"
+  },
   "author": "yetzt <git@yetzt.me> (https://github.com/yetzt)",
   "contributors": [{
     "name": "Michael Kreil",
