@@ -9,8 +9,8 @@ module.exports = {
 	
 	/* listening interfaces, (--listen on command line) */
 	listen: [
-		"udp4:127.0.0.1:46002",
-		"udp6:[::1]:46002"
+		"udp4:127.0.0.1:30826",
+		"udp6:[::1]:30826"
 	],
 	
 	/* show output on console, (-v on command line) */

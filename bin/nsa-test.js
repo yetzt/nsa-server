@@ -34,7 +34,7 @@ var timers = [];
 
 instances.forEach(function (instance, index) {
 	var nsaConfig = {
-		server: 'udp4:127.0.0.1:46002',
+		server: 'udp4:127.0.0.1:30826',
 		service: instance.service,
 		node: instance.node,
 		interval: '3s'
