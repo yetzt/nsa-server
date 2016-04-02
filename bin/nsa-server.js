@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 
-/* node modules */
+// node modules
 var fs = require("fs");
 var url = require("url");
 var path = require("path");
 var querystring = require("querystring");
 
-/* npm modules */
+// npm modules
 var express = require("express");
 var commander = require("commander");
 
-/* local modules */
+// local modules
 var cia = require("../lib/cia");
 var gchq = require("../lib/gchq");
 
-/* load package.json */
+// load package.json
 var pkg = require(path.resolve(__dirname, "../package.json"));
 
-/* parse arguments */
+// parse arguments
 commander
 	.version(pkg.version)
 	.option("-c, --config [config.js]", "config file")
@@ -26,7 +26,7 @@ commander
 	.option("-v, --verbose", "say it loud", function(val, store){ store++; }, 0)
 	.parse(process.argv);
 
-/* load config */
+// load config
 var config = gchq()
 	.file(path.resolve(__dirname, "../config.js"))
 	.file(commander.config)
@@ -35,38 +35,38 @@ var config = gchq()
 	.set("info", (commander.verbose >= 1))
 	.set("debug", (commander.verbose >= 2));
 	
-/* check if listeners are configured */
+// check if listeners are configured
 if (!config.get("listen")) {
 	console.error("no listeners defined");
 	process.exit(7);
 }
 
-/* convert single listener config to array */
+// convert single listener config to array
 if (config.type("listen") !== "array") config.set("listen", [config.get("listen")]);
 
-/* initialize listeners */
+// initialize listeners
 var listener = cia();
 
 config.get("listen").forEach(function(l){
 	listener.listen(l);
 });
 
-/* listen according to config and stuff */
+// listen according to config and stuff
 (function(){
 
 	if (!config.has("web") || config.type("web") !== "string") return;
 
 	var _opts = querystring.parse(url.parse(config.get("web")).query);
 
-	/* initialize express */
+	// initialize express
 	var app = express();
 	var server = require('http').createServer(app);
 	var io = require("socket.io").listen(server, {log: false});
 
-	/* serve assets */
+	// serve assets
 	app.use("/assets", express.static(path.resolve(__dirname, "../assets")));
 
-	/* send index file */
+	// send index file
 	app.get("/", function(req, res){
 		res.sendFile(path.resolve(__dirname, "../assets/html/index.html"));
 	});
@@ -75,10 +75,10 @@ config.get("listen").forEach(function(l){
 		res.json({status:true});
 	});
 	
-	/* show status pages if configured */
+	// show status pages if configured
 	if (_opts.hasOwnProperty("status")) {
 	
-		/* send nodes as json */
+		// send nodes as json
 		app.get("/nodes.json", function(req, res){
 			listener.getnodes(function(nodes){
 				res.json(nodes);
@@ -111,16 +111,16 @@ config.get("listen").forEach(function(l){
 	
 	switch (listen.protocol) {
 		case "unix:": 
-			/* unlink old socket if present */
+			// unlink old socket if present
 			if (typeof listen.pathname !== "string" || listen.pathname === "") {
 				console.error("specified socket path is invalid");
 				process.exit(3);
 			}
 			
-			/* check if socket path is relative */
+			// check if socket path is relative
 			if (listen.hostname.substr(0,1) === ".") listen.pathname = path.resolve(__dirname, listen.hostname, listen.pathname)
 
-			/* add .sock to socket if not present */
+			// add .sock to socket if not present
 			if (!/\.sock(et)?$/.test(listen.pathname)) listen.pathname += ".sock";
 
 			if (fs.existsSync(listen.pathname)) fs.unlinkSync(listen.pathname);
@@ -132,11 +132,11 @@ config.get("listen").forEach(function(l){
 			server.listen(listen.pathname, function(){
 				if (config.get("info")) console.log("listening on socket", listen.pathname);
 
-				/* check options */
+				// check options
 				if (listen.query) {
 					var query = querystring.parse(listen.query);
 
-					/* change mode of socket if requested */
+					// change mode of socket if requested
 					if (query.hasOwnProperty("mode")) {
 						var mode = parseInt(query.mode, 8);
 						if (!isNaN(mode) && mode <= 0777) {
@@ -157,7 +157,7 @@ config.get("listen").forEach(function(l){
 		break;
 		case "http:":
 			if (listen.hasOwnProperty("hostname") && typeof listen.hostname === "string" && listen.hostname !== "") {
-				/* listen on hostname and port */
+				// listen on hostname and port
 				server.listen((listen.port || 46001), listen.hostname, function(err){
 					if (config.get("info")) console.log("listening on http://"+listen.hostname+":"+(listen.port || 46001));
 				});

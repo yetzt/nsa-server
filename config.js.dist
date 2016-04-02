@@ -1,13 +1,13 @@
-/* nsa server example config */
+// nsa server example config
 module.exports = {
 
-	/* web interface, listening on socket, (--web on command line) */
+	// web interface, listening on socket, (--web on command line)
 	web: "unix:/tmp/nsa-server.sock?mode=0777&status=true",
 
-	/* web interface, http server, (--web on command line) */
+	// web interface, http server, (--web on command line)
 	web: "http://127.0.0.1:46001/?status=true",
 	
-	/* listening interfaces, (--listen on command line) */
+	// listening interfaces, (--listen on command line)
 	listen: [
 		"udp4:127.0.0.1:30826",
 		"udp6:[::1]:30826"
@@ -16,7 +16,7 @@ module.exports = {
 	/* show output on console, (-v on command line) */
 	info: true,
 	
-	/* show debug messages, (-vv on command line) */
+	// show debug messages, (-v on command line)
 	debug: true
 	
 };
