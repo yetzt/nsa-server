@@ -4,7 +4,7 @@ NSA sees all, because NSA is the Networked Status Aggregator.
 
 ![nsa successful in europe](assets/images/nsa-promo.jpg)
 
-The idea is simple: The NSA server receives hartbeats over network sockets (currently only udp) and displays running services on a web interface (and, in the future, maybe does other stuff with them).
+The idea is simple: The NSA server receives heartbeats over network sockets (currently only udp) and displays running services on a web interface (and, in the future, maybe does other stuff with them).
 
 NSA is as simple as possible: Clients just send heartbeats and nsa displays new clients on the go. Other than deciding on where to listen, no further configuration is required. Maybe some sort of simple authentication will be implemented, but for now it's all just working out of the box. 
 
