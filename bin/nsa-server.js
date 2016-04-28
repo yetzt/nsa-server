@@ -4,11 +4,13 @@
 var fs = require("fs");
 var url = require("url");
 var path = require("path");
+var util = require("util");
 var querystring = require("querystring");
 
 // npm modules
 var debug = require("debug");
 var express = require("express");
+var request = require("request");
 var commander = require("commander");
 
 // local modules
