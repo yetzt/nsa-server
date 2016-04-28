@@ -23,12 +23,13 @@ npm install -g nsa-server
 run `bin/nsa-server.js` with these options:
 
 * `--config ./config.js` Load Config File from `$CWD/config.js`
-* `--web http://localhost:9999/` HTTP Web Interface on `localhost` port `9999`
+* `--web http://localhost:30826/` HTTP Web Interface on `localhost` port `30826`
 * `--web unix:/tmp/nsa.sock?mode=0760` Web Interface socket `/tmp/nsa.sock` with mode `0760`
-* `--listen udp4://localhost:8888` Listen for Messages on `localhost` port `8888` with IPv4
-* `--listen udp6://localhost:8888` Listen for Messages on `localhost` port `8888` with IPv6
+* `--listen udp4://localhost:30826` Listen for Messages on `localhost` port `30826` with IPv4
+* `--listen udp6://localhost:30826` Listen for Messages on `localhost` port `30826` with IPv6
 
 You can use `--listen` more than once.
+`30826` is the default port, because `parseInt("nsa",36);`.
 
 See also [config.js.dist](config.js.dist);
 

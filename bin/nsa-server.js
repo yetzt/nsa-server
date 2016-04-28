@@ -162,12 +162,12 @@ config.get("listen").forEach(function(l){
 		case "http:":
 			if (listen.hasOwnProperty("hostname") && typeof listen.hostname === "string" && listen.hostname !== "") {
 				// listen on hostname and port
-				server.listen((listen.port || 46001), listen.hostname, function(err){
-					dbg("listening on %s", "http://"+listen.hostname+":"+(listen.port || 46001));
+				server.listen((listen.port || 30826), listen.hostname, function(err){
+					dbg("listening on %s", "http://"+listen.hostname+":"+(listen.port || 30826));
 				});
 			} else {
-				server.listen((listen.port || 46001), function(err){
-					dbg("listening on %s", "http://*:"+(listen.port || 46001));
+				server.listen((listen.port || 30826), function(err){
+					dbg("listening on %s", "http://*:"+(listen.port || 30826));
 				});
 			}
 		break;
