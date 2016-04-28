@@ -53,10 +53,10 @@ if (!config.get("listen")) {
 if (config.type("listen") !== "array") config.set("listen", [config.get("listen")]);
 if (config.type("webhook") !== "array") config.set("webhook", [config.get("webhook")]);
 
-var webhook_send = function(message){
+var webhook_send = function(type, message){
 	if (config.get("webhook").length === 0) return;
 	config.get("webhook").forEach(function(webhook_url){
-		
+
 		// add message to payload
 		var payload = { text: message };
 
@@ -64,9 +64,14 @@ var webhook_send = function(message){
 		webhook_url = url.parse(webhook_url);
 		if (webhook_url.hasOwnProperty("hash") && (typeof webhook_url.hash === "string") && webhook_url.hash.length > 1) payload.channel = webhook_url.hash;
 		if (webhook_url.hasOwnProperty("auth") && (typeof webhook_url.auth === "string") && webhook_url.auth.length > 0) payload.username = webhook_url.auth.split(/:/g).shift();
+		var types = (webhook_url.hasOwnProperty("query") && (typeof webhook_url.query === "string") && webhook_url.query.length > 0) ? webhook_url.query.split(/[^a-z]/g) : ["all"];
 		webhook_url.hash = null;
 		webhook_url.auth = null;
+		webhook_url.query = null;
 		webhook_url = url.format(webhook_url);
+
+		// check for type
+		if (types.indexOf(type) < 0 && types.indexOf("all") < 0) return;
 
 		request({
 			method: "POST",
@@ -76,7 +81,7 @@ var webhook_send = function(message){
 			if (err) return debug("could not send notification to webhook: %o", err.message);
 		});
 	});
-};
+};	
 
 // initialize listeners
 var listener = cia();
@@ -127,19 +132,19 @@ config.get("listen").forEach(function(l){
 		io.sockets.emit("info", info);
 	}).on("node+inactive", function(id, service, node){
 		io.sockets.emit("inactive", id);
-		webhook_send(util.format("Inactive: %s@%s", service, node))
+		webhook_send("inactive", util.format("Inactive: %s@%s", service, node))
 	}).on("node+register", function(id, service, node){
 		io.sockets.emit("register", id);
-		webhook_send(util.format("New Node: %s@%s", service, node))
+		webhook_send("register", util.format("New Node: %s@%s", service, node))
 	}).on("node+active", function(id, service, node){
 		io.sockets.emit("active", id);
-		webhook_send(util.format("Active: %s@%s", service, node))
+		webhook_send("active", util.format("Active: %s@%s", service, node))
 	}).on("node+reset", function(id, service, node){
 		io.sockets.emit("reset", id);
-		webhook_send(util.format("Reset: %s@%s", service, node))
+		webhook_send("reset", util.format("Reset: %s@%s", service, node))
 	}).on("node+retire", function(id, service, node){
 		io.sockets.emit("remove", id);
-		webhook_send(util.format("Retired: %s@%s", service, node))
+		webhook_send("remove", util.format("Retired: %s@%s", service, node))
 	}).on("error", function(err){
 		debug("CIA Error: %o", err.message);
 	});

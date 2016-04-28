@@ -15,7 +15,7 @@ module.exports = {
 	
 	// webhooks for slack or mattermost, user@ and #channel optional
 	webhook: [
-		"https://user@hooks.slack.com/services/...#channel"
+		"https://user@hooks.slack.com/services/...?register,active,inactive,reset,remove#channel"
 	],
 	
 	// show debug messages, (-v on command line)
