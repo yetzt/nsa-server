@@ -51,7 +51,7 @@ if (!config.get("listen")) {
 if (config.type("listen") !== "array") config.set("listen", [config.get("listen")]);
 if (config.type("webhook") !== "array") config.set("webhook", [config.get("webhook")]);
 
-var send_webhook = function(message){
+var webhook_send = function(message){
 	if (config.get("webhook").length === 0) return;
 	config.get("webhook").forEach(function(webhook_url){
 		

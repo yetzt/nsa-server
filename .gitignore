@@ -1,2 +1,5 @@
 config.js
 node_modules
+bin/nsa-blub.js
+bin/nsa-reset.js
+bin/nsa-test.js
