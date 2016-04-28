@@ -32,20 +32,24 @@ run `bin/nsa-server.js` with these options:
 You can use `--listen` and `--webhook` more than once.
 `30826` is the default port, because `parseInt("nsa",36);`.
 
-See also [config.js.dist](config.js.dist);
+See also: [config.js.dist](config.js.dist);
 
+## Send Messages
 
-## Message Format
+You can use the [nsa](https://npmjs.com/package/nsa) module to send packets or implement it yourself.
+
+### Message Format
 
 In case you want to expand it for your own purposes.
 
 ```` javascript
 var message = [
 	0,              // message format version
-	0,              // message type (0=heartbeat,1=retire)
+	0,              // message type (0=heartbeat,1=retire,2=data)
 	0,              // sequence number of message
 	"example",      // name of the service
 	"example.host", // name of the node
-	10000           // number of microseconds till next message
+	10000,          // number of microseconds till next message
+	{data:"json"}   // data (only when message type = 2)
 ];
 ````
