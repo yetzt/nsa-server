@@ -13,6 +13,11 @@ module.exports = {
 		"udp6:[::1]:30826"
 	],
 	
+	// webhooks for slack or mattermost, user@ and #channel optional
+	webhook: [
+		"https://user@hooks.slack.com/services/...#channel"
+	],
+	
 	// show debug messages, (-v on command line)
 	debug: true
 	
