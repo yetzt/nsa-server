@@ -163,6 +163,9 @@ function UI() {
 		var data = instance.data;
 		instance.$.toggleClass(  'active',  data.active);
 		instance.$.toggleClass('inactive', !data.active);
+
+		instance.$.css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.active)?'green':'red'), format: 'rgb', seed: data.node }) });		
+
 		instance.$.find('li.uptime span').text(data.active ? 'uptime' : 'downtime');
 		instance.$.find('li.uptime strong').text(moment(data.active ? data.lastreset : data.updated).fromNow(true));
 
@@ -185,9 +188,9 @@ function UI() {
 		instance.$ = $('<div class="item hidden"><h1 class="clearfix"><span class="service"></span><br><span class="node"></span></h1><ul class="content"><li class="uptime"><span>uptime</span> <strong>0s</strong></li></ul></div>');
 
 		instance.$.find('.service').text(data.service);
-		instance.$.find('.node').text(data.node);
+		instance.$.find('.node').text(data.node).css({ color: randomColor({ luminosity: 'light', format: 'rgb', seed: data.node }) });
 		instance.$.appendTo($container);
-		instance.$.css({ width: tileWidth, height: tileHeight, "box-shadow": "5px 0 "+randomColor({ luminosity: 'light', format: 'rgb', seed: data.node })+" inset" });
+		instance.$.css({ width: tileWidth, height: tileHeight, backgroundColor: randomColor({ luminosity: 'dark', hue: 'green', format: 'rgb', seed: data.node }) });
 	}
 
 	function removeInstance(id) {
