@@ -187,7 +187,7 @@ function UI() {
 		instance.$.find('.service').text(data.service);
 		instance.$.find('.node').text(data.node);
 		instance.$.appendTo($container);
-		instance.$.css({ width: tileWidth, height: tileHeight });
+		instance.$.css({ width: tileWidth, height: tileHeight, "box-shadow": "5px 0 "+randomColor({ luminosity: 'light', format: 'rgb', seed: data.node })+" inset" });
 	}
 
 	function removeInstance(id) {
