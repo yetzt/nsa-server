@@ -73,6 +73,29 @@ body {
 			background-color: #e94f03;
 			opacity: 1.0;
 		}
+
+		#grid .item.inactive.defcon,
+		#grid .item.active.defcon {
+			background-color: #ff2082;
+			opacity: 1.0;
+			-webkit-animation-name: defcon;
+			animation-name: defcon;
+		}
+
+		@-webkit-keyframes defcon {
+		    0% { -webkit-transform: scale(1); opacity: 1; }
+			 25% { -webkit-transform: scale(1.1); opacity: 0.5; }
+		    50% { -webkit-transform: scale(1.2); opacity: 1; }
+			 75% { -webkit-transform: scale(1.1); opacity: 0.5; }
+		    100% { -webkit-transform: scale(1); opacity: 1; }
+		}
+		@keyframes defcon {
+		    0% { transform: scale(1); opacity: 1; }
+			 75% { transform: scale(1.1); opacity: 0.5; }
+		    50% { transform: scale(1.2); opacity: 1; }
+			 75% { transform: scale(1.1); opacity: 0.5; }
+		    100% { transform: scale(1); opacity: 1; }
+		}
 		
 		#grid .item.info {
 			background-color: #0a89d6 !important;

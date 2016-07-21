@@ -163,8 +163,10 @@ function UI() {
 		var data = instance.data;
 		instance.$.toggleClass(  'active',  data.active);
 		instance.$.toggleClass('inactive', !data.active);
+		
+		instance.$.toggleClass('defcon',  data.defon > 0);
 
-		instance.$.css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.active)?'green':'red'), format: 'rgb', seed: data.node }) });		
+		instance.$.css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.defcon>0)?'pink':(data.active)?'green':'red'), format: 'rgb', seed: data.node }) });
 
 		instance.$.find('li.uptime span').text(data.active ? 'uptime' : 'downtime');
 		instance.$.find('li.uptime strong').text(moment(data.active ? data.lastreset : data.updated).fromNow(true));
