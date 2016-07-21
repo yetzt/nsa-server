@@ -168,8 +168,6 @@ function UI() {
 		
 		instance.$.toggleClass('defcon',  data.defcon > 0);
 
-		console.log(data.defcon, defcons[data.defcon]);
-
 		instance.$.find(".inner").css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.defcon>0)?defcons[data.defcon]:(data.active)?'green':'red'), format: 'rgb', seed: data.node }) });
 
 		instance.$.find('li.uptime span').text(data.active ? 'uptime' : 'downtime');
