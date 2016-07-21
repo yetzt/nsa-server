@@ -164,7 +164,7 @@ function UI() {
 		instance.$.toggleClass(  'active',  data.active);
 		instance.$.toggleClass('inactive', !data.active);
 		
-		instance.$.toggleClass('defcon',  data.defon > 0);
+		instance.$.toggleClass('defcon',  data.defcon > 0);
 
 		instance.$.css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.defcon>0)?'pink':(data.active)?'green':'red'), format: 'rgb', seed: data.node }) });
 

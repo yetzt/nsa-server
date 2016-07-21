@@ -1,6 +1,6 @@
 {
   "name": "nsa-server",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "preferGlobal": true,
   "description": "networked status aggregator server",
   "main": "bin/nsa-server.js",
