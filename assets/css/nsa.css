@@ -51,6 +51,19 @@ body {
 		#grid .item {
 			display: block;
 			position: absolute;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			background-color: transparent;
+		}
+		
+		#grid .item .inner {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
 			background-color: #111111;
 			opacity: 0.3;
 			color: #fff;
@@ -59,35 +72,36 @@ body {
 			transition-duration: 0.5s;
 			
 			-webkit-transform-origin: 0 0;
-			        transform-origin: 0 0;
-
+			transform-origin: 0 0;
 			box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
 		}
 		
-		#grid .item.active {
+		#grid .item.active .inner {
 			background-color: #419606;
 			opacity: 1.0;
 		}
 
-		#grid .item.inactive {
+		#grid .item.inactive .inner {
 			background-color: #e94f03;
 			opacity: 1.0;
 		}
 
-		#grid .item.inactive.defcon,
-		#grid .item.active.defcon {
+		#grid .item.active.defcon .inner {
 			background-color: #ff2082;
 			opacity: 1.0;
 		
-			animation-duration: 4s;
+			animation-duration: 1s;
 			animation-fill-mode: forwards;
 			animation-iteration-count: infinite;
 			animation-timing-function: ease-out;
+			transform-origin: 50% 50%;
 		   -webkit-animation-name: bounceIn;
-		   -webkit-animation-duration: 4s;
+		   -webkit-animation-duration: 1s;
 		   -webkit-animation-iteration-count: infinite;
 		   -webkit-animation-timing-function: ease-out;
 		   -webkit-animation-fill-mode: forwards;
+			-webkit-transform-origin: 50% 50%;
 		
 			-webkit-animation-name: defcon;
 			animation-name: defcon;
@@ -102,19 +116,19 @@ body {
 		}
 		
 		@keyframes defcon {
-		    0% { transform: scale(1); opacity: 1; }
-			 75% { transform: scale(1.1); opacity: 0.5; }
-		    50% { transform: scale(1.2); opacity: 1; }
-			 75% { transform: scale(1.1); opacity: 0.5; }
-		    100% { transform: scale(1); opacity: 1; }
+		    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+			 25% { transform: scale(1.05) rotate(2deg); opacity: 0.8; }
+		    50% { transform: scale(1.1) rotate(0deg); opacity: 1; }
+			 75% { transform: scale(1.05) rotate(-2deg); opacity: 0.8; }
+		    100% { transform: scale(1) rotate(0deg); opacity: 1; }
 		}
 		
-		#grid .item.info {
+		#grid .item.info .inner {
 			background-color: #0a89d6 !important;
 			opacity: 1.0;
 		}
 		
-		#grid .item.hidden {
+		#grid .item.hidden .inner {
 			opacity: 0.0 !important;
 		}
 		

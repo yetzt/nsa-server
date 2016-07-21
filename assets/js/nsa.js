@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 	var _last = (new Date()).getTime();
 	var _fails = 0;
-
+	
 	var socket = io.connect();
 	socket.on('nodes', function(nodes) {
 		nodes.forEach(function(node){
@@ -90,6 +90,8 @@ function UI() {
 	var margin = 10;
 
 	var doLayout = true;
+	
+	var defcons = ["blue", "green", "yellow", "orange", "red", "pink"];
 
 	$(window).resize(function() {
 		doLayout = true;
@@ -166,7 +168,9 @@ function UI() {
 		
 		instance.$.toggleClass('defcon',  data.defcon > 0);
 
-		instance.$.css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.defcon>0)?'pink':(data.active)?'green':'red'), format: 'rgb', seed: data.node }) });
+		console.log(data.defcon, defcons[data.defcon]);
+
+		instance.$.find(".inner").css({ backgroundColor: randomColor({ luminosity: 'dark', hue: ((data.defcon>0)?defcons[data.defcon]:(data.active)?'green':'red'), format: 'rgb', seed: data.node }) });
 
 		instance.$.find('li.uptime span').text(data.active ? 'uptime' : 'downtime');
 		instance.$.find('li.uptime strong').text(moment(data.active ? data.lastreset : data.updated).fromNow(true));
@@ -187,12 +191,13 @@ function UI() {
 		instances[data.id] = instance;
 
 		instance.data = data;
-		instance.$ = $('<div class="item hidden"><h1 class="clearfix"><span class="service"></span><br><span class="node"></span></h1><ul class="content"><li class="uptime"><span>uptime</span> <strong>0s</strong></li></ul></div>');
+		instance.$ = $('<div class="item hidden"><div class="inner"><h1 class="clearfix"><span class="service"></span><br><span class="node"></span></h1><ul class="content"><li class="uptime"><span>uptime</span> <strong>0s</strong></li></ul></div></div>');
 
 		instance.$.find('.service').text(data.service);
 		instance.$.find('.node').text(data.node).css({ color: randomColor({ luminosity: 'light', format: 'rgb', seed: data.node }) });
 		instance.$.appendTo($container);
-		instance.$.css({ width: tileWidth, height: tileHeight, backgroundColor: randomColor({ luminosity: 'dark', hue: 'green', format: 'rgb', seed: data.node }) });
+		instance.$.css({ width: tileWidth, height: tileHeight });
+		instance.$.find(".inner").css({ width: tileWidth, height: tileHeight, backgroundColor: randomColor({ luminosity: 'dark', hue: 'green', format: 'rgb', seed: data.node }) });
 	}
 
 	function removeInstance(id) {
