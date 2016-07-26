@@ -108,11 +108,11 @@ body {
 		}
 
 		@-webkit-keyframes defcon {
-		    0% { -webkit-transform: scale(1); opacity: 1; }
-			 25% { -webkit-transform: scale(1.1); opacity: 0.5; }
-		    50% { -webkit-transform: scale(1.2); opacity: 1; }
-			 75% { -webkit-transform: scale(1.1); opacity: 0.5; }
-		    100% { -webkit-transform: scale(1); opacity: 1; }
+		    0% { -webkit-transform: scale(1) rotate(0deg); opacity: 1; }
+			 25% { -webkit-transform: scale(1.05)rotate(-2deg); opacity: 0.8; }
+		    50% { -webkit-transform: scale(1.1) rotate(0deg); opacity: 1; }
+			 75% { -webkit-transform: scale(1.05)rotate(-2deg); opacity: 0.8; }
+		    100% { -webkit-transform: scale(1) rotate(0deg); opacity: 1; }
 		}
 		
 		@keyframes defcon {
