@@ -95,7 +95,7 @@ config.get("listen").forEach(function(l){
 
 	if (!config.has("web") || config.type("web") !== "string") return console.error("no web interface configured") || process.exit(8);
 
-	var _opts = querystring.parse(url.parse(config.get("web")).query);
+	var _opts = JSON.parse(JSON.stringify(querystring.parse(url.parse(config.get("web")).query)));
 
 	// initialize express
 	var app = express();
