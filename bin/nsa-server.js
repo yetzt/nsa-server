@@ -176,7 +176,7 @@ config.get("listen").forEach(function(l){
 
 				// check options
 				if (listen.query) {
-					var query = querystring.parse(listen.query);
+					var query = JSON.parse(JSON.stringify(querystring.parse(listen.query)));
 
 					// change mode of socket if requested
 					if (query.hasOwnProperty("mode")) {
