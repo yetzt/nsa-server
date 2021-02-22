@@ -100,7 +100,7 @@ config.get("listen").forEach(function(l){
 	// initialize express
 	var app = express();
 	var server = require('http').createServer(app);
-	var io = require("socket.io").listen(server, {log: false});
+	var io = require("socket.io")(server);
 
 	// serve assets
 	app.use("/assets", express.static(path.resolve(__dirname, "../assets")));
