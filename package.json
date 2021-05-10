@@ -23,7 +23,7 @@
     "socket.io": "^3.1.1"
   },
   "devDependencies": {
-    "nsa": "^0.1.0"
+    "nsa": "^0.2.0"
   },
   "author": "yetzt <git@yetzt.me> (https://github.com/yetzt)",
   "contributors": [
