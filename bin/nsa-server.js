@@ -109,10 +109,10 @@ config.get("listen").forEach(function(l){
 	app.get("/check", function(req, res){
 		res.json({ status: true });
 	});
-	
+
 	// show status pages if configured
 	if (_opts.hasOwnProperty("status")) {
-	
+
 		// send nodes as json
 		app.get("/nodes.json", function(req, res){
 			listener.getnodes(function(nodes){
@@ -121,13 +121,13 @@ config.get("listen").forEach(function(l){
 		});
 
 	};
-	
+
 	io.sockets.on('connection', function (socket) {
 		listener.getnodes(function(nodes){
 			socket.emit('nodes', nodes);
 		});
 	});
-	
+
 	listener.on("node+info", function(info){
 		io.sockets.emit("info", info);
 	}).on("node+inactive", function(id, service, node){
@@ -148,17 +148,17 @@ config.get("listen").forEach(function(l){
 	}).on("error", function(err){
 		debug("CIA Error: %o", err.message);
 	});
-	
+
 	var listen = url.parse(config.get("web"));
-	
+
 	switch (listen.protocol) {
-		case "unix:": 
+		case "unix:":
 			// unlink old socket if present
 			if (typeof listen.pathname !== "string" || listen.pathname === "") {
 				console.error("specified socket path is invalid");
 				process.exit(3);
 			}
-			
+
 			// check if socket path is relative
 			if (listen.hostname.substr(0,1) === ".") listen.pathname = path.resolve(__dirname, listen.hostname, listen.pathname)
 
@@ -170,7 +170,7 @@ config.get("listen").forEach(function(l){
 				console.error("previous socket could not be unlinked");
 				process.exit(4);
 			}
-			
+
 			server.listen(listen.pathname, function(){
 				dbg("listening on socket %s", listen.pathname);
 
@@ -189,9 +189,9 @@ config.get("listen").forEach(function(l){
 						}
 					}
 				}
-				
+
 			});
-			
+
 		break;
 		case "https:":
 			console.error("https is not supportet yet.");
@@ -209,7 +209,7 @@ config.get("listen").forEach(function(l){
 				});
 			}
 		break;
-		default: 
+		default:
 			console.error("hostname and port or socket for web interface not specified");
 			process.exit(6)
 		break;
