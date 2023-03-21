@@ -1,6 +1,6 @@
 {
   "name": "nsa-server",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "preferGlobal": true,
   "description": "networked status aggregator server",
   "main": "bin/nsa-server.js",
@@ -16,11 +16,11 @@
     "url": "https://github.com/yetzt/nsa-server.git"
   },
   "dependencies": {
-    "commander": "^9.4.1",
+    "commander": "^10.0.0",
     "debug": "^4.3.4",
     "express": "^4.13.4",
-    "request": "^2.72.0",
-    "socket.io": "^4.5.4"
+    "needle": "^3.2.0",
+    "socket.io": "^4.6.1"
   },
   "devDependencies": {
     "nsa": "^0.2.0"
