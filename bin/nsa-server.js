@@ -21,23 +21,23 @@ var gchq = require("../lib/gchq");
 var pkg = require(path.resolve(__dirname, "../package.json"));
 
 // parse arguments
-commander
+var opts = commander
 	.version(pkg.version)
 	.option("-c, --config [config.js]", "config file")
 	.option("-w, --web [url]", "web interface url")
 	.option("-l, --listen [url]", "listen url", function(v, s){ s.push(v); return s; }, [])
 	.option("-s, --webhook [url]", "webhook url", function(v, s){ s.push(v); return s; }, [])
 	.option("-v, --verbose", "say it loud", function(val, store){ store++; }, 0)
-	.parse(process.argv);
+	.parse(process.argv).opts();
 
 // load config
 var config = gchq()
 	.file(path.resolve(__dirname, "../config.js"))
-	.file(commander.config)
-	.set("web", commander.web)
-	.set("listen", commander.listen)
-	.set("webhook", commander.webhook)
-	.set("debug", (commander.verbose >= 0));
+	.file(opts.config)
+	.set("web", opts.web)
+	.set("listen", opts.listen)
+	.set("webhook", opts.webhook)
+	.set("debug", (opts.verbose >= 0));
 
 // set debugger
 if (config.get("debug")) debug.enable("nsa");
