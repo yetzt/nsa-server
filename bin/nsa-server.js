@@ -10,7 +10,7 @@ var querystring = require("querystring");
 // npm modules
 var debug = require("debug");
 var express = require("express");
-var request = require("request");
+var needle = require("needle");
 var commander = require("commander");
 
 // local modules
@@ -73,15 +73,11 @@ var webhook_send = function(type, message){
 		// check for type
 		if (types.indexOf(type) < 0 && types.indexOf("all") < 0) return;
 
-		request({
-			method: "POST",
-			url: webhook_url,
-			form: { "payload": JSON.stringify(payload) }
-		}, function (err, resp, data) {
+		needle.post(webhook_url, { "payload": JSON.stringify(payload) }, function (err, resp, data) {
 			if (err) return debug("could not send notification to webhook: %o", err.message);
 		});
 	});
-};	
+};
 
 // initialize listeners
 var listener = cia();
