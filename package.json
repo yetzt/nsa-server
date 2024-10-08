@@ -1,6 +1,6 @@
 {
   "name": "nsa-server",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "preferGlobal": true,
   "description": "networked status aggregator server",
   "main": "bin/nsa-server.js",
@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "commander": "^10.0.1",
-    "debug": "^4.3.5",
-    "express": "^4.19.2",
+    "debug": "^4.3.7",
+    "express": "^4.21.0",
     "needle": "^3.3.1",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.8.0"
   },
   "devDependencies": {
     "nsa": "^0.2.0"
